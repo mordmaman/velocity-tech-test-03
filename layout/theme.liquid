@@ -11,9 +11,14 @@
 
   <meta name="description" content="">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
   <!-- CSS -->
   {{ 'base.css' | asset_url | stylesheet_tag }}
   {{ 'header.css' | asset_url | stylesheet_tag }}
+  {{ 'footer.css' | asset_url | stylesheet_tag }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   <!-- JavaScript -->
@@ -33,5 +38,7 @@
   <main id="MainContent" role="main">
     {{ content_for_layout }}
   </main>
+
+  {% sections 'footer-group' %}
 </body>
 </html>

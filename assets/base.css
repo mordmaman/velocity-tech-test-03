@@ -7,6 +7,35 @@
   box-sizing: border-box;
 }
 
+/* Set default font family to Montserrat */
+:root {
+  --font-body-family: 'Montserrat', sans-serif;
+  --font-heading-family: 'Montserrat', sans-serif;
+  
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* Apply font family to body */
+body {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apply font family to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-weight-semibold);
+}
+
 /* Remove default margin and padding */
 html,
 body,
@@ -93,7 +122,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 
@@ -110,15 +138,6 @@ menu,
 nav,
 section {
   display: block;
-}
-
-/* Set core body defaults */
-body {
-  line-height: 1.5;
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Remove list styles */
@@ -168,7 +187,7 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
+  font-family: var(--font-body-family);
   font-size: 100%;
   line-height: 1.15;
   margin: 0;

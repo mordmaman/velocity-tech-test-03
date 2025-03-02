@@ -1,0 +1,111 @@
+<div class="footer">
+  <div class="footer__container container">
+    <div class="footer__branding">
+      <div class="footer__logo">
+        <a href="/" class="footer__logo-link">
+          {% if section.settings.footer_logo %}
+            <img 
+              src="{{ section.settings.footer_logo | image_url }}" 
+              alt="{{ shop.name }}" 
+              class="footer__logo-image"
+              width="{{ section.settings.logo_width }}"
+              height="auto">
+          {% else %}
+            <span class="footer__logo-text">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+      
+      {% if section.settings.tagline != blank %}
+        <div class="footer__tagline">
+          {{ section.settings.tagline }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="footer__nav-policy-container">
+        {% if section.settings.show_footer_menu %}
+        <div class="footer__nav">
+            <ul class="footer__menu">
+            {% for link in linklists[section.settings.footer_menu].links %}
+                <li class="footer__menu-item">
+                <a href="{{ link.url }}" class="footer__menu-link">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if section.settings.show_policy_menu %}
+        <div class="footer__policies">
+            <ul class="footer__policy-menu">
+            {% for link in linklists[section.settings.policy_menu].links %}
+                <li class="footer__policy-item">
+                <a href="{{ link.url }}" class="footer__policy-link">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 200,
+      "step": 1,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 133
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer_menu",
+      "label": "Show footer menu",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_menu",
+      "label": "Show policy links",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "policy_menu",
+      "label": "Policy menu",
+      "default": "footer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}

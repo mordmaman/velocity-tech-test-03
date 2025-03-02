@@ -1,0 +1,21 @@
+{
+    "name": "Footer",
+    "type": "footer",
+    "sections": {
+        "footer": {
+            "type": "footer",
+            "settings": {
+                "footer_logo": "",
+                "logo_width": 133,
+                "tagline": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "show_footer_menu": true,
+                "footer_menu": "main-menu",
+                "show_policy_menu": true,
+                "policy_menu": "footer"
+            }
+        }
+    },
+    "order": [
+        "footer"
+    ]
+}

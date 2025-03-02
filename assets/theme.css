@@ -1,3 +1,21 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#MainContent {
+    flex: 1 0 auto; /* This makes the main content expand to push footer down */
+}
+
+.footer {
+    margin-top: auto; /* Optional extra assurance that footer stays at bottom */
+}
+
 /* Accessibility - Visually hidden elements */
 .visually-hidden {
     position: absolute !important;
