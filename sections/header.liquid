@@ -1,0 +1,60 @@
+<div class="header">
+  <div class="header__container container">
+    <div class="header__logo">
+      <a href="/" class="header__logo-link">
+        {% if section.settings.logo %}
+          <img 
+            src="{{ section.settings.logo | image_url }}" 
+            alt="{{ shop.name }}" 
+            class="header__logo-image"
+            width="{{ section.settings.logo_width }}"
+            height="auto">
+        {% else %}
+          <span class="header__logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="header__icons">
+      <a href="{{ routes.account_url }}" class="header__icon-link header__icon-link--account">
+        {% render 'icons', icon: 'account', class: 'header__icon', width: 40, height: 40 %}
+      </a>
+      
+      <a href="{{ routes.cart_url }}" class="header__icon-link header__icon-link--cart js-cart-trigger">
+        {% render 'icons', icon: 'cart', class: 'header__icon', width: 40, height: 40 %}
+        {% if cart.item_count > 0 %}
+          <span class="header__cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 200,
+      "step": 1,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 133
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

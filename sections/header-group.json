@@ -1,0 +1,16 @@
+{
+    "name": "Header",
+    "type": "header",
+    "sections": {
+        "header": {
+        "type": "header",
+        "settings": {
+            "logo": "",
+            "logo_width": 100
+        }
+        }
+    },
+    "order": [
+        "header"
+    ]
+}
