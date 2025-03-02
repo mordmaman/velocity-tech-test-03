@@ -1,0 +1,28 @@
+<div class="collection">
+  <div class="collection__header">
+    <h1 class="collection__title">{{ collection.title }}</h1>
+  </div>
+
+  <div class="collection__grid">
+    {% paginate collection.products by 4 %}
+      <div class="collection__products">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+      
+      {% if paginate.pages > 1 %}
+        <div class="collection__pagination">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Template",
+  "settings": []
+}
+{% endschema %}

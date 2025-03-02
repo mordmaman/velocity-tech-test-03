@@ -20,10 +20,10 @@
   {{ 'header.css' | asset_url | stylesheet_tag }}
   {{ 'footer.css' | asset_url | stylesheet_tag }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'collection.css' | asset_url | stylesheet_tag }}
 
   <!-- JavaScript -->
-  {{ 'header.js' | asset_url | stylesheet_tag }}
-  {{ 'global.js' | asset_url | stylesheet_tag }}
+  {{ 'cart.js'| asset_url | script_tag }}
 
   {{ content_for_header }}
 </head>
@@ -40,5 +40,7 @@
   </main>
 
   {% sections 'footer-group' %}
+
+  {% render 'cart-drawer' %}
 </body>
 </html>

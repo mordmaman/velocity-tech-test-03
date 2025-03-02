@@ -1,0 +1,75 @@
+{% comment %}
+  Product Card Snippet
+  Usage:
+  {% render 'product-card', product: product %}
+{% endcomment %}
+
+<div class="product-card">
+  <div class="product-card__header">
+    {% if product.metafields.custom.badge != blank %}
+      <div class="product-card__badge">
+        <span class="badge badge--new">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="badge__icon">
+            <path d="M8 2L9 6L13 7L9 8L8 12L7 8L3 7L7 6L8 2Z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="badge__text">{{ product.metafields.custom.badge }}</span>
+        </span>
+      </div>
+    {% endif %}
+    
+    <button class="product-card__wishlist js-wishlist-toggle" aria-label="Add to wishlist" data-product-id="{{ product.id }}">
+      {% render 'icons', icon: 'wishlist' %}
+    </button>
+  </div>
+  
+  <a href="{{ product.url }}" class="product-card__link">
+    <div class="product-card__image-container">
+      {% if product.featured_image != blank %}
+        <img 
+          src="{{ product.featured_image | img_url: '400x' }}" 
+          alt="{{ product.featured_image.alt | escape }}"
+          class="product-card__image"
+          width="400"
+          height="400"
+          loading="lazy">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder' }}
+      {% endif %}
+    </div>
+  </a>
+  
+  <div class="product-card__details">
+    <h2 class="product-card__title">{{ product.title }}</h2>
+    {% if product.variants.first.option1 != 'Default Title' %}
+      <p class="product-card__variant">Size {{ product.variants.first.option1 }}</p>
+    {% else %}
+        <p class="product-card__variant">Default Size</p>
+    {% endif %}
+
+    <div class="product-card__divider"></div>
+    
+    <div class="product-card__purchase">
+      <form method="post" action="/cart/add" class="product-card__form js-ajax-cart-form" data-product-id="{{ product.id }}">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        <div class="product-card__quantity">
+          <button type="button" class="product-card__quantity-button product-card__quantity-decrease js-quantity-decrease" aria-label="Decrease quantity">
+            <span>-</span>
+          </button>
+          <input type="number" name="quantity" class="product-card__quantity-input js-quantity-input" value="0" min="0" max="99" aria-label="Quantity">
+          <button type="button" class="product-card__quantity-button product-card__quantity-increase js-quantity-increase" aria-label="Increase quantity">
+            <span>+</span>
+          </button>
+        </div>
+      </form>
+      
+      <div class="product-card__price">
+        {% if product.price_varies %}
+          <span class="product-card__price-amount">From {{ product.price_min | money }}</span>
+        {% else %}
+          <span class="product-card__price-amount">{{ product.price | money }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

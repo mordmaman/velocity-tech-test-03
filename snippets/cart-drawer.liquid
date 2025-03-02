@@ -1,0 +1,78 @@
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title">Your basket</h2>
+    <button class="cart-drawer__close" aria-label="Close cart">&times;</button>
+  </div>
+  
+  <div class="cart-drawer__content">
+    {% if cart.item_count > 0 %}
+      <div class="cart-drawer__items">
+        {% for item in cart.items %}
+          <div class="cart-item" data-item-id="{{ item.id }}">
+            <img 
+              src="{{ item.image | img_url: '80x' }}" 
+              alt="{{ item.title | escape }}"
+              class="cart-item__image"
+              width="80"
+              height="80"
+              loading="lazy">
+            
+            <div class="cart-item__content">
+              <h3 class="cart-item__title">{{ item.product.title }}</h3>
+              
+              {% if item.variant.title != 'Default Title' %}
+                <p class="cart-item__variant">{{ item.variant.title }}</p>
+              {% endif %}
+              
+              <div class="cart-item__footer">
+                <div class="cart-item__quantity">
+                  <button class="cart-item__quantity-button cart-item__quantity-decrease js-cart-qty-decrease" data-item-key="{{ item.key }}" aria-label="Decrease quantity">
+                    <span>-</span>
+                  </button>
+                  <input type="number" class="cart-item__quantity-input js-cart-qty" value="{{ item.quantity }}" min="1" max="99" data-item-key="{{ item.key }}" aria-label="Item quantity">
+                  <button class="cart-item__quantity-button cart-item__quantity-increase js-cart-qty-increase" data-item-key="{{ item.key }}" aria-label="Increase quantity">
+                    <span>+</span>
+                  </button>
+                </div>
+                
+                <div class="cart-item__price">
+                  {{ item.final_line_price | money }}
+                </div>
+              </div>
+            </div>
+            
+            <button class="cart-item__remove js-cart-remove" data-item-key="{{ item.key }}" aria-label="Remove item">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="cart-drawer__empty">
+        <p class="cart-drawer__empty-message">Your basket is empty</p>
+        <a href="/collections/all" class="cart-drawer__continue">Continue shopping</a>
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="cart-drawer__footer">
+    <div class="cart-drawer__summary">
+      <span>Total</span>
+      <span>{{ cart.total_price | money }}</span>
+    </div>
+    
+    {% if cart.item_count > 0 %}
+      <a href="/checkout" class="cart-drawer__checkout">
+        Checkout now
+      </a>
+    {% else %}
+      <button class="cart-drawer__checkout" disabled>
+        Checkout now
+      </button>
+    {% endif %}
+  </div>
+</div>
+
+<div class="overlay"></div>
